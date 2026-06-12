@@ -26,9 +26,46 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 @keyframes titlePulse{ 0%, 100%{ opacity: 1; transform: scale(1);} 50%{ opacity: 0.9; transform: scale(1.02);}}
 .intro-subtitle{ margin-top: 10px; font-size: 20px; color:#63b3ed; text-align: center; letter-spacing: 5px; text-shadow: 0 0 20px rgba(99, 179, 237, 0.8);}
 .intro-desc{ margin-top: 20px; max-width: 600px; text-align: center; color:#cbd5e0; font-size: 14px; line-height: 1.6; padding: 0 20px;}
+
+.difficulty-section{ margin-top: 25px; width: 100%; max-width: 700px; padding: 0 20px;}
+.difficulty-title{ font-size: 16px; color:#a0aec0; text-align: center; letter-spacing: 3px; margin-bottom: 15px; text-transform: uppercase;}
+.difficulty-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;}
+.difficulty-card{ background: linear-gradient(145deg, rgba(45, 55, 72, 0.6), rgba(26, 32, 44, 0.8)); border: 2px solid #4a5568; border-radius: 20px; padding: 18px 12px; cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;}
+.difficulty-card::before{ content:''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent, rgba(255,255,255,0.05)); opacity: 0; transition: opacity 0.3s;}
+.difficulty-card:hover::before{ opacity: 1;}
+.difficulty-card:hover{ transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+.difficulty-card.selected{ transform: translateY(-4px);}
+.difficulty-card .icon{ font-size: 32px; margin-bottom: 8px; display: block;}
+.difficulty-card .name{ font-size: 15px; font-weight: 900; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase;}
+.difficulty-card .desc{ font-size: 11px; color:#cbd5e0; line-height: 1.4; margin-bottom: 8px;}
+.difficulty-card .params{ font-size: 10px; color:#a0aec0; line-height: 1.5; font-family: monospace;}
+
+/* ✅ Цветовая схема: 🟢 ЛЁГКИЙ — зелёный #48bb78 */
+.difficulty-card.light{ border-color: #48bb78;}
+.difficulty-card.light.selected{ background: linear-gradient(145deg, rgba(72, 187, 120, 0.3), rgba(47, 133, 90, 0.5)); box-shadow: 0 0 30px rgba(72, 187, 120, 0.6), 0 10px 30px rgba(0,0,0,0.5);}
+.difficulty-card.light .name{ color: #68d391;}
+
+/* ✅ Цветовая схема: 🟡 СРЕДНИЙ — жёлтый #ecc94b */
+.difficulty-card.medium{ border-color: #ecc94b;}
+.difficulty-card.medium.selected{ background: linear-gradient(145deg, rgba(236, 201, 75, 0.3), rgba(221, 161, 32, 0.5)); box-shadow: 0 0 30px rgba(236, 201, 75, 0.6), 0 10px 30px rgba(0,0,0,0.5);}
+.difficulty-card.medium .name{ color: #f6e05e;}
+
+/* ✅ Цветовая схема: 🔴 СЛОЖНЫЙ — красный #e53e3e */
+.difficulty-card.hard{ border-color: #e53e3e;}
+.difficulty-card.hard.selected{ background: linear-gradient(145deg, rgba(229, 62, 62, 0.3), rgba(197, 48, 48, 0.5)); box-shadow: 0 0 30px rgba(229, 62, 62, 0.6), 0 10px 30px rgba(0,0,0,0.5);}
+.difficulty-card.hard .name{ color: #fc8181;}
+
+.difficulty-card .check-mark{ position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; border-radius: 50%; background: currentColor; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px; opacity: 0; transform: scale(0); transition: all 0.3s;}
+.difficulty-card.selected .check-mark{ opacity: 1; transform: scale(1);}
+
 .start-btn{ margin-top: 30px; padding: 18px 60px; font-size: 20px; font-weight: bold; background: linear-gradient(145deg,#4a5568,#2d3748); border: none; border-radius: 50px; color: white; cursor: pointer; box-shadow: 0 8px 0 #1a202c, 0 15px 30px rgba(74, 85, 104, 0.6); transition: all 0.2s; text-transform: uppercase; letter-spacing: 2px;}
 .start-btn:hover{ transform: translateY(-3px); box-shadow: 0 11px 0 #1a202c, 0 20px 40px rgba(74, 85, 104, 0.8);}
 .start-btn:active{ transform: translateY(5px); box-shadow: 0 3px 0 #1a202c, 0 8px 15px rgba(74, 85, 104, 0.6);}
+
+.current-difficulty{ position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; padding: 8px 20px; border-radius: 30px; font-size: 12px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; backdrop-filter: blur(10px); border: 2px solid; font-family: monospace; pointer-events: none;}
+.current-difficulty.light{ background: rgba(72, 187, 120, 0.2); border-color: #48bb78; color: #68d391; box-shadow: 0 0 20px rgba(72, 187, 120, 0.4);}
+.current-difficulty.medium{ background: rgba(236, 201, 75, 0.2); border-color: #ecc94b; color: #f6e05e; box-shadow: 0 0 20px rgba(236, 201, 75, 0.4);}
+.current-difficulty.hard{ background: rgba(229, 62, 62, 0.2); border-color: #e53e3e; color: #fc8181; box-shadow: 0 0 20px rgba(229, 62, 62, 0.4);}
 
 #simulator-page{ position: fixed; inset: 0; opacity: 0; pointer-events: none; transition: opacity 1s ease; background: radial-gradient(ellipse at top,#2d3748 0%,#1a202c 50%, #0d1117 100%);}
 #simulator-page.active{ opacity: 1; pointer-events: all;}
@@ -112,12 +149,15 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
  .logo-sub{ font-size: 9px;}
  .intro-title{ font-size: 28px;}
  .intro-subtitle{ font-size: 14px;}
+ .difficulty-grid{ grid-template-columns: 1fr; gap: 10px;}
+ .difficulty-card{ padding: 14px 10px;}
  .start-btn{ padding: 14px 40px; font-size: 16px;}
  .victory-content{ padding: 30px;}
  .victory-content h2{ font-size: 32px;}
  #resetDroneBtn, #exitMenuBtn{ bottom: 120px; padding: 8px 20px; font-size: 12px;}
  #resetDroneBtn{ left: calc(50% - 120px);}
  #exitMenuBtn{ left: calc(50% + 10px);}
+ .current-difficulty{ font-size: 10px; padding: 6px 14px;}
 }
 </style>
 </head>
@@ -131,15 +171,60 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
   </div>
 </div>
 
+<div id="currentDifficulty" class="current-difficulty medium">⚡ СРЕДНИЙ</div>
+
 <div id="intro-page">
   <img src="uav-operator.jpg" alt="Оператор ПРИЗРАК" class="intro-image">
   <h1 class="intro-title">ОПЕРАТОР ПРИЗРАК</h1>
   <div class="intro-subtitle">Qwen · БПЛА ТРЕНАЖЁР · УРОК 6</div>
   <div class="intro-desc">
     Скрытная разведка вражеской базы. Оператор "ПРИЗРАК" должен собрать разведданные 
-    с 5 объектов, избегая патрулей и радаров противника. Следите за индикатором заметности — 
-    при 100% вас обнаружат! У вас <b>4 минуты</b>.
+    с объектов, избегая патрулей и радаров противника. Следите за индикатором заметности — 
+    при 100% вас обнаружат! Выберите уровень сложности:
   </div>
+
+  <div class="difficulty-section">
+    <div class="difficulty-title">⚙️ УРОВЕНЬ СЛОЖНОСТИ</div>
+    <div class="difficulty-grid">
+      <div class="difficulty-card light" data-difficulty="light">
+        <div class="check-mark">✓</div>
+        <span class="icon">🌱</span>
+        <div class="name">ЛЁГКИЙ</div>
+        <div class="desc">Для новичков. Идеально для первого знакомства со стелс-механикой.</div>
+        <div class="params">
+          ⏱️ 5 мин | 🎯 5 целей<br>
+          👁️ Низкая заметность<br>
+          🐢 Медленные враги (3 шт.)<br>
+          📡 Лёгкий захват
+        </div>
+      </div>
+      <div class="difficulty-card medium selected" data-difficulty="medium">
+        <div class="check-mark">✓</div>
+        <span class="icon">⚡</span>
+        <div class="name">СРЕДНИЙ</div>
+        <div class="desc">Стандартный режим. Сбалансированный вызов для опытных операторов.</div>
+        <div class="params">
+          ⏱️ 4 мин | 🎯 5 целей<br>
+          👁️ Средняя заметность<br>
+          🚶 Средние враги (4 шт.)<br>
+          📡 Стандартный захват
+        </div>
+      </div>
+      <div class="difficulty-card hard" data-difficulty="hard">
+        <div class="check-mark">✓</div>
+        <span class="icon">💀</span>
+        <div class="name">СЛОЖНЫЙ</div>
+        <div class="desc">Для элиты. Только для настоящих мастеров стелс-разведки.</div>
+        <div class="params">
+          ⏱️ 3 мин | 🎯 7 целей<br>
+          👁️ Высокая заметность<br>
+          🏃 Быстрые враги (6 шт.)<br>
+          📡 Сложный захват
+        </div>
+      </div>
+    </div>
+  </div>
+
   <button class="start-btn" id="startBtn">НАЧАТЬ РАЗВЕДКУ</button>
 </div>
 
@@ -154,7 +239,7 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
     <div class="stats">
       <div class="stat">📡 Разведданные: <span id="hits">0</span></div>
       <div class="stat">⏱️ Время: <span id="mission-timer">240</span>с</div>
-      <div class="stat">🎯 Урок 6: Стелс</div>
+      <div class="stat" id="difficulty-stat">⚡ Сложность: <span id="difficulty-label">СРЕДНИЙ</span></div>
     </div>
   </div>
 
@@ -169,7 +254,7 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 
   <div id="target-panel">
     🎯 ОБЪЕКТОВ РАЗВЕДАНО<br>
-    <span id="target-counter">0</span> / 5<br>
+    <span id="target-counter">0</span> / <span id="target-total">5</span><br>
     <span style="font-size:11px;">🎯 Удерживайте прицел 2с</span>
   </div>
 
@@ -193,7 +278,7 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
     ⚠️ Избегайте конусов обзора врагов!
   </div>
 
-  <div class="lesson-badge">📡 ЗАДАНИЕ: Разведать 5 объектов скрытно</div>
+  <div class="lesson-badge">📡 ЗАДАНИЕ: Разведать объекты скрытно</div>
 
   <button id="resetDroneBtn">🔄 Перезапустить</button>
   <button id="exitMenuBtn">🚪 Выйти в меню</button>
@@ -218,14 +303,15 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 
 <div id="victoryModal" class="victory-modal">
   <div class="victory-content">
-    <h2>🏆 РАЗВЕДКА ЗАВЕРШЕНА! 🏆</h2>
-    <p>Отличная работа, оператор "ПРИЗРАК"!<br>Все объекты разведаны!</p>
+    <h2 id="victoryTitle">🏆 РАЗВЕДКА ЗАВЕРШЕНА! 🏆</h2>
+    <p id="victoryMessage">Отличная работа, оператор "ПРИЗРАК"!<br>Все объекты разведаны!</p>
     <div class="victory-stats">
-      Разведано: <span id="victoryHits">5</span>/5 📡<br>
+      Уровень: <span id="victoryDifficulty">СРЕДНИЙ</span><br>
+      Разведано: <span id="victoryHits">5</span>/<span id="victoryTotal">5</span> 📡<br>
       Макс. заметность: <span id="victoryDetection">0</span>% 👁️<br>
       Время: <span id="victoryTime">0</span>с ⏱️
     </div>
-    <p>Настоящий мастер стелс-разведки! 👻</p>
+    <p id="victoryRank">Настоящий мастер стелс-разведки! 👻</p>
     <button class="restart-game-btn" id="fullRestartBtn">🔄 НАЧАТЬ ЗАНОВО</button>
     <button class="exit-game-btn" id="exitToMenuBtn">🚪 В МЕНЮ</button>
   </div>
@@ -237,67 +323,86 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-const CONFIG = {
-  DRONE_SPEED: 0.08,
-  DRONE_DRAG: 0.93,
-  MAX_TILT: 0.3,
-  MAX_ALTITUDE: 60,
-  MIN_ALTITUDE: 3,
-  START_ALTITUDE: 20,
-  CLIMB_SPEED: 0.25,
-  DIVE_SPEED: 0.35,
-  HOVER_FREQ: 0.001,
-  COLLISION_FORCE_THRESHOLD: 0.05,
-  CRASH_FORCE_THRESHOLD: 0.15,
-  LIMIT_X: 18,
-  LIMIT_Z: 18,
-  MIN_X: -18,
-  MIN_Z: -18,
-  GROUND_Y: 0,
-  TARGET_COUNT: 5,
-  CAMERA_OFFSET: { x: 0, y: 8, z: 12 },
-  CAMERA_LERP: 0.09,
-  LOW_END_CORES: 4,
-  MAX_PIXEL_RATIO: 2,
-  CAPTURE_TIME: 2000,
-  CAPTURE_RADIUS: 5,
-  TRAIL_LENGTH: 15,
-  MISSION_TIME: 240,
-  DETECTION_DECAY: 0.3,
-  DETECTION_GROWTH: 0.8,
-  ENEMY_COUNT: 4,
-  ENEMY_SPEED: 0.03,
-  ENEMY_VIEW_DISTANCE: 8,
-  ENEMY_VIEW_ANGLE: Math.PI / 3,
-  STEALTH_ALTITUDE: 15
+let audioCtx = null;
+let audioHintShown = false;
+
+// ✅ Три уровня сложности с правильной цветовой схемой
+const DIFFICULTY_PRESETS = {
+  light: {
+    name: 'ЛЁГКИЙ', icon: '🌱', className: 'light',
+    MISSION_TIME: 300, TARGET_COUNT: 5, ENEMY_COUNT: 3,
+    ENEMY_SPEED: 0.02, ENEMY_VIEW_DISTANCE: 7, ENEMY_VIEW_ANGLE: Math.PI / 4,
+    DETECTION_GROWTH: 0.5, DETECTION_DECAY: 0.5,
+    CAPTURE_TIME: 1500, CAPTURE_RADIUS: 6, STEALTH_ALTITUDE: 18,
+    rankMessage: '🌱 Отличное начало! Ты настоящий разведчик!'
+  },
+  medium: {
+    name: 'СРЕДНИЙ', icon: '⚡', className: 'medium',
+    MISSION_TIME: 240, TARGET_COUNT: 5, ENEMY_COUNT: 4,
+    ENEMY_SPEED: 0.03, ENEMY_VIEW_DISTANCE: 8, ENEMY_VIEW_ANGLE: Math.PI / 3,
+    DETECTION_GROWTH: 0.8, DETECTION_DECAY: 0.3,
+    CAPTURE_TIME: 2000, CAPTURE_RADIUS: 5, STEALTH_ALTITUDE: 15,
+    rankMessage: '⚡ Настоящий мастер стелс-разведки! 👻'
+  },
+  hard: {
+    name: 'СЛОЖНЫЙ', icon: '💀', className: 'hard',
+    MISSION_TIME: 180, TARGET_COUNT: 7, ENEMY_COUNT: 6,
+    ENEMY_SPEED: 0.05, ENEMY_VIEW_DISTANCE: 10, ENEMY_VIEW_ANGLE: Math.PI / 2.5,
+    DETECTION_GROWTH: 1.3, DETECTION_DECAY: 0.15,
+    CAPTURE_TIME: 2500, CAPTURE_RADIUS: 4, STEALTH_ALTITUDE: 12,
+    rankMessage: '💀 ЛЕГЕНДА! Ты — истинный мастер! 👻👻👻'
+  }
 };
 
+// ✅ Совместимость со старым сохранением 'easy' → 'light'
+let currentDifficulty = localStorage.getItem('prizrak_difficulty') || 'medium';
+if(currentDifficulty === 'easy') currentDifficulty = 'light';
+if(!DIFFICULTY_PRESETS[currentDifficulty]) currentDifficulty = 'medium';
+
+const MAX_CAPTURE_ALTITUDE = 10;
+
+const CONFIG = {
+  DRONE_SPEED: 0.08, DRONE_DRAG: 0.93, MAX_TILT: 0.3,
+  MAX_ALTITUDE: 60, MIN_ALTITUDE: 3, START_ALTITUDE: 20,
+  CLIMB_SPEED: 0.25, DIVE_SPEED: 0.35, HOVER_FREQ: 0.001,
+  COLLISION_FORCE_THRESHOLD: 0.05, CRASH_FORCE_THRESHOLD: 0.15,
+  LIMIT_X: 18, LIMIT_Z: 18, MIN_X: -18, MIN_Z: -18, GROUND_Y: 0,
+  CAMERA_OFFSET: { x: 0, y: 8, z: 12 }, CAMERA_LERP: 0.09,
+  LOW_END_CORES: 4, MAX_PIXEL_RATIO: 2, TRAIL_LENGTH: 15,
+  MISSION_TIME: 240, TARGET_COUNT: 5, ENEMY_COUNT: 4,
+  ENEMY_SPEED: 0.03, ENEMY_VIEW_DISTANCE: 8, ENEMY_VIEW_ANGLE: Math.PI / 3,
+  DETECTION_GROWTH: 0.8, DETECTION_DECAY: 0.3,
+  CAPTURE_TIME: 2000, CAPTURE_RADIUS: 5, STEALTH_ALTITUDE: 15
+};
+
+function applyDifficulty(difficultyKey){
+  const preset = DIFFICULTY_PRESETS[difficultyKey];
+  if(!preset) return;
+  CONFIG.MISSION_TIME = preset.MISSION_TIME;
+  CONFIG.TARGET_COUNT = preset.TARGET_COUNT;
+  CONFIG.ENEMY_COUNT = preset.ENEMY_COUNT;
+  CONFIG.ENEMY_SPEED = preset.ENEMY_SPEED;
+  CONFIG.ENEMY_VIEW_DISTANCE = preset.ENEMY_VIEW_DISTANCE;
+  CONFIG.ENEMY_VIEW_ANGLE = preset.ENEMY_VIEW_ANGLE;
+  CONFIG.DETECTION_GROWTH = preset.DETECTION_GROWTH;
+  CONFIG.DETECTION_DECAY = preset.DETECTION_DECAY;
+  CONFIG.CAPTURE_TIME = preset.CAPTURE_TIME;
+  CONFIG.CAPTURE_RADIUS = preset.CAPTURE_RADIUS;
+  CONFIG.STEALTH_ALTITUDE = preset.STEALTH_ALTITUDE;
+}
+applyDifficulty(currentDifficulty);
+
 const state = {
-  keys: {},
-  mouseDown: false,
-  pitch: 0,
-  roll: 0,
-  velocity: { x: 0, z: 0 },
-  altitude: CONFIG.START_ALTITUDE,
-  targetAltitude: CONFIG.START_ALTITUDE,
-  isCrashed: false,
-  collectedCount: 0,
-  propAngle: 0,
-  trailIndex: 0,
-  trailTimer: 0,
-  animationId: null,
-  simulatorInitialized: false,
-  gameCompleted: false,
-  thermalMode: false,
-  currentTarget: null,
-  captureStartTime: 0,
-  timeLeft: CONFIG.MISSION_TIME,
-  timerInterval: null,
-  missionStartTime: 0,
-  maxDetection: 0,
-  detectionLevel: 0,
-  isRestarting: false,
-  isPaused: false
+  keys: {}, mouseDown: false, pitch: 0, roll: 0,
+  velocity: { x: 0, y: 0, z: 0 },
+  altitude: CONFIG.START_ALTITUDE, targetAltitude: CONFIG.START_ALTITUDE,
+  isCrashed: false, collectedCount: 0, propAngle: 0,
+  trailIndex: 0, trailTimer: 0, animationId: null,
+  simulatorInitialized: false, gameCompleted: false, thermalMode: false,
+  currentTarget: null, captureStartTime: 0,
+  timeLeft: CONFIG.MISSION_TIME, timerInterval: null, missionStartTime: 0,
+  maxDetection: 0, detectionLevel: 0,
+  isRestarting: false, isPaused: false, difficulty: currentDifficulty
 };
 
 let scene, camera, renderer, droneGroup;
@@ -314,6 +419,28 @@ let radarCtx, radarCanvas;
 const sharedGeometries = {
   ring: new THREE.RingGeometry(0.1, 0.2, 32)
 };
+
+function disposeGroup(group){
+  if(!group) return;
+  group.traverse(obj => {
+    if(obj.geometry){
+      try { obj.geometry.dispose(); } catch(e){}
+    }
+    if(obj.material){
+      try {
+        if(Array.isArray(obj.material)){
+          obj.material.forEach(m => {
+            if(m.map) m.map.dispose();
+            m.dispose();
+          });
+        } else {
+          if(obj.material.map) obj.material.map.dispose();
+          obj.material.dispose();
+        }
+      } catch(e){}
+    }
+  });
+}
 
 function checkWebGL(){
   try{
@@ -337,6 +464,43 @@ function checkWebGL(){
     else { img.onerror = null; }
   };
 })();
+
+function initDifficultyUI(){
+  const cards = document.querySelectorAll('.difficulty-card');
+  cards.forEach(card => {
+    if(card.dataset.difficulty === currentDifficulty){
+      card.classList.add('selected');
+    } else {
+      card.classList.remove('selected');
+    }
+    card.addEventListener('click', () => {
+      cards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      currentDifficulty = card.dataset.difficulty;
+      localStorage.setItem('prizrak_difficulty', currentDifficulty);
+      state.difficulty = currentDifficulty;
+      applyDifficulty(currentDifficulty);
+      updateDifficultyIndicators();
+      SFX.beep();
+    });
+  });
+  updateDifficultyIndicators();
+}
+
+function updateDifficultyIndicators(){
+  const preset = DIFFICULTY_PRESETS[currentDifficulty];
+  const indicator = document.getElementById('currentDifficulty');
+  if(indicator){
+    indicator.className = 'current-difficulty ' + preset.className;
+    indicator.innerText = preset.icon + ' ' + preset.name;
+  }
+  const diffLabel = document.getElementById('difficulty-label');
+  if(diffLabel) diffLabel.innerText = preset.name;
+  const targetTotal = document.getElementById('target-total');
+  if(targetTotal) targetTotal.innerText = CONFIG.TARGET_COUNT;
+  const timerElem = document.getElementById('mission-timer');
+  if(timerElem && !state.simulatorInitialized) timerElem.innerText = CONFIG.MISSION_TIME;
+}
 
 function copyPhone(){
   const phone = document.getElementById('phoneNumber').innerText;
@@ -375,13 +539,34 @@ async function startAudio(){
 document.getElementById('startBtn').addEventListener('click', startSimulator);
 async function startSimulator(){
   await startAudio();
+  applyDifficulty(currentDifficulty);
+  state.difficulty = currentDifficulty;
   document.getElementById('intro-page').classList.add('hidden');
   setTimeout(() => {
     document.getElementById('simulator-page').classList.add('active');
-    if(!state.simulatorInitialized) initSimulator();
-    else fullGameRestart();
-    startMissionTimer();
+    if(!state.simulatorInitialized){
+      initSimulator();
+      startMissionTimer();
+    } else {
+      fullGameRestart();
+    }
   }, 800);
+}
+
+function resetThermalMode(){
+  if(!state.thermalMode) return;
+  state.thermalMode = false;
+  document.body.style.filter = '';
+  if(scene && scene.fog) scene.fog.color.setHex(0x2d3748);
+  if(renderer) renderer.toneMappingExposure = 0.8;
+  enemies.forEach(e => {
+    if(!e || !e.group || !e.group.children || !e.group.children[0]) return;
+    const mesh = e.group.children[0];
+    if(mesh && mesh.material){
+      mesh.material.emissive = new THREE.Color(0x000000);
+      mesh.material.emissiveIntensity = 0;
+    }
+  });
 }
 
 function exitToMenu(){
@@ -393,25 +578,17 @@ function exitToMenu(){
     clearInterval(state.timerInterval);
     state.timerInterval = null;
   }
-  if(state.thermalMode){
-    state.thermalMode = false;
-    document.body.style.filter = '';
-    scene.fog.color.setHex(0x2d3748);
-    renderer.toneMappingExposure = 0.8;
-  }
+  resetThermalMode();
   document.getElementById('victoryModal').classList.remove('show');
   document.getElementById('simulator-page').classList.remove('active');
   setTimeout(() => {
     document.getElementById('intro-page').classList.remove('hidden');
-    if(!state.animationId) animate(performance.now());
+    if(!state.animationId && state.simulatorInitialized) animate(performance.now());
   }, 300);
   const music = document.getElementById('bg-music');
   music.pause();
   music.currentTime = 0;
 }
-
-let audioCtx = null;
-let audioHintShown = false;
 
 function ensureAudio(){
   if(!audioCtx){
@@ -476,9 +653,10 @@ const SFX = {
 
 let notifTimeout = null;
 let lastNotifText = "";
-function showNotification(text, type = ''){
+function showNotification(text, type = '', force = false){
   const n = document.getElementById('notification');
-  if(!n || lastNotifText === text) return;
+  if(!n) return;
+  if(!force && lastNotifText === text) return;
   lastNotifText = text;
   n.innerText = text;
   n.className = 'show ' + type;
@@ -496,31 +674,45 @@ function showVictoryModal(){
     clearInterval(state.timerInterval);
     state.timerInterval = null;
   }
-  state.velocity = { x: 0, z: 0 };
-  
+  state.velocity = { x: 0, y: 0, z: 0 };
+  const preset = DIFFICULTY_PRESETS[state.difficulty];
   const timeUsed = CONFIG.MISSION_TIME - state.timeLeft;
   document.getElementById('victoryHits').innerText = state.collectedCount;
+  document.getElementById('victoryTotal').innerText = CONFIG.TARGET_COUNT;
   document.getElementById('victoryDetection').innerText = Math.round(state.maxDetection);
   document.getElementById('victoryTime').innerText = timeUsed;
+  document.getElementById('victoryDifficulty').innerText = preset.icon + ' ' + preset.name;
+  document.getElementById('victoryRank').innerText = preset.rankMessage;
+  if(state.isCrashed && state.timeLeft <= 0){
+    document.getElementById('victoryTitle').innerText = '⏰ ВРЕМЯ ВЫШЛО!';
+    document.getElementById('victoryMessage').innerHTML = 'Миссия провалена. Не успели собрать все данные.';
+  } else if(state.isCrashed){
+    document.getElementById('victoryTitle').innerText = '🚨 ОБНАРУЖЕН!';
+    document.getElementById('victoryMessage').innerHTML = 'Вас засекли вражеские патрули.<br>В следующий раз будьте незаметнее!';
+  } else {
+    document.getElementById('victoryTitle').innerText = '🏆 РАЗВЕДКА ЗАВЕРШЕНА! 🏆';
+    document.getElementById('victoryMessage').innerHTML = 'Отличная работа, оператор "ПРИЗРАК"!<br>Все объекты разведаны!';
+  }
   document.getElementById('victoryModal').classList.add('show');
-  SFX.victory();
-  showNotification("✅ УРОК 6 ПРОЙДЕН! Мастер стелс-разведки!", 'success');
+  if(!state.isCrashed) SFX.victory();
+  else SFX.detected();
 }
 
 function clearActiveAnimations(){
-  activeAnimations.forEach(anim => { if(anim.cancel) anim.cancel(); });
+  activeAnimations.forEach(anim => { if(anim && anim.cancel) anim.cancel(); });
   activeAnimations = [];
 }
 
 function fullGameRestart(){
   if(state.isRestarting) return;
   state.isRestarting = true;
-  
+  applyDifficulty(currentDifficulty);
+  state.difficulty = currentDifficulty;
   document.getElementById('victoryModal').classList.remove('show');
   state.gameCompleted = false;
   state.collectedCount = 0;
   state.isCrashed = false;
-  state.velocity = { x: 0, z: 0 };
+  state.velocity = { x: 0, y: 0, z: 0 };
   state.altitude = CONFIG.START_ALTITUDE;
   state.targetAltitude = CONFIG.START_ALTITUDE;
   state.pitch = 0;
@@ -529,38 +721,39 @@ function fullGameRestart(){
   state.captureStartTime = 0;
   state.detectionLevel = 0;
   state.maxDetection = 0;
-  
-  // ✅ ИСПРАВЛЕНИЕ: Явный сброс тепловизора
-  if(state.thermalMode) {
-    state.thermalMode = false;
-    document.body.style.filter = '';
-    scene.fog.color.setHex(0x2d3748);
-    renderer.toneMappingExposure = 0.8;
-    enemies.forEach(e => {
-      if(e.group.children[0] && e.group.children[0].material) {
-        e.group.children[0].material.emissive = new THREE.Color(0x000000);
-        e.group.children[0].material.emissiveIntensity = 0;
-      }
-    });
-  }
+  resetThermalMode();
 
   document.getElementById('hits').innerText = '0';
   document.getElementById('target-counter').innerText = '0';
+  document.getElementById('target-total').innerText = CONFIG.TARGET_COUNT;
   document.getElementById('detection-fill').style.width = '0%';
   document.getElementById('crosshair-progress').classList.remove('active');
   document.getElementById('crosshair').classList.remove('locked');
+  updateDifficultyIndicators();
 
   if(droneGroup){
     droneGroup.position.set(0, state.altitude, 0);
     droneGroup.rotation.set(0, 0, 0);
   }
 
-  for(let t of targets){
-    if(t && typeof t.reset === 'function') t.reset();
-  }
-  for(let e of enemies){
-    if(e && typeof e.reset === 'function') e.reset();
-  }
+  targets.forEach(t => {
+    if(t && t.group){
+      disposeGroup(t.group);
+      if(scene) scene.remove(t.group);
+    }
+  });
+  targets = [];
+  
+  enemies.forEach(e => {
+    if(e && e.group){
+      disposeGroup(e.group);
+      if(scene) scene.remove(e.group);
+    }
+  });
+  enemies = [];
+
+  setupTargets();
+  setupEnemies();
 
   trailParticles.forEach(p => {
     p.visible = false;
@@ -569,17 +762,14 @@ function fullGameRestart(){
   });
 
   clearActiveAnimations();
-  
-  // ✅ ИСПРАВЛЕНИЕ: Явный сброс таймера перед перезапуском
   if(state.timerInterval) {
     clearInterval(state.timerInterval);
     state.timerInterval = null;
   }
   state.timeLeft = CONFIG.MISSION_TIME;
-  
   startMissionTimer();
-  showNotification("🔄 Разведка перезапущена! Будь невидим, ПРИЗРАК! 👻", 'success');
-  
+  const preset = DIFFICULTY_PRESETS[currentDifficulty];
+  showNotification(`${preset.icon} Режим: ${preset.name}! Разведка перезапущена!`, 'success', true);
   setTimeout(() => { state.isRestarting = false; }, 500);
 }
 
@@ -592,31 +782,26 @@ function startMissionTimer(){
   if(state.timerInterval) clearInterval(state.timerInterval);
   state.timeLeft = CONFIG.MISSION_TIME;
   state.missionStartTime = Date.now();
-  
   const timerElem = document.getElementById('mission-timer');
   if(timerElem) timerElem.innerText = state.timeLeft;
-  
   state.timerInterval = setInterval(() => {
     if(state.isCrashed || state.gameCompleted) return;
     state.timeLeft--;
     if(timerElem) timerElem.innerText = state.timeLeft;
-    
     if(state.timeLeft === 60){
-      showNotification("⏰ Осталась 1 минута!", 'info');
+      showNotification("⏰ Осталась 1 минута!", 'info', true);
     }
     if(state.timeLeft === 30){
-      showNotification("⏰ Осталось 30 секунд!", 'hit');
+      showNotification("⏰ Осталось 30 секунд!", 'hit', true);
     }
     if(state.timeLeft === 10){
-      showNotification("⏰ 10 секунд!", 'hit');
+      showNotification("⏰ 10 секунд!", 'hit', true);
     }
-    
     if(state.timeLeft <= 0 && !state.gameCompleted){
       clearInterval(state.timerInterval);
       state.timerInterval = null;
-      showNotification("⏰ ВРЕМЯ ВЫШЛО! Миссия провалена.", 'hit');
       state.isCrashed = true;
-      SFX.crash();
+      showVictoryModal();
     }
   }, 1000);
 }
@@ -631,7 +816,6 @@ function initSimulator(){
     document.getElementById('webgl-error').classList.add('show');
     return;
   }
-
   setupScene();
   setupLights();
   setupFloor();
@@ -643,16 +827,14 @@ function initSimulator(){
   setupRadar();
   setupEventListeners();
   state.simulatorInitialized = true;
-
   setTimeout(() => {
     if(!audioCtx || audioCtx.state === 'suspended'){
       if(!audioHintShown){
-        showNotification("🎵 Нажмите на экран для звука", 'info');
+        showNotification("🎵 Нажмите на экран для звука", 'info', true);
         audioHintShown = true;
       }
     }
   }, 1500);
-
   animate(performance.now());
   console.log('✅ Урок 6 запущен. Оператор ПРИЗРАК — в эфир!');
 }
@@ -661,27 +843,22 @@ function setupScene(){
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x2d3748);
   scene.fog = new THREE.FogExp2(0x2d3748, 0.015);
-
   camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(0, state.altitude + 8, 12);
-
   isLowEnd = (navigator.hardwareConcurrency || 4) < CONFIG.LOW_END_CORES;
   const pixelRatio = isLowEnd ? 1 : Math.min(window.devicePixelRatio, CONFIG.MAX_PIXEL_RATIO);
-
   try{
     renderer = new THREE.WebGLRenderer({ antialias: !isLowEnd, alpha: true });
   } catch(e){
     document.getElementById('webgl-error').classList.add('show');
     throw e;
   }
-
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(pixelRatio);
   renderer.shadowMap.enabled = !isLowEnd;
   if(!isLowEnd) renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 0.8;
-
   const simPage = document.getElementById('simulator-page');
   simPage.insertBefore(renderer.domElement, simPage.firstChild);
   renderer.domElement.style.position = 'fixed';
@@ -692,7 +869,6 @@ function setupScene(){
 
 function setupLights(){
   scene.add(new THREE.AmbientLight(0x4a5568, 0.4));
-
   const moonLight = new THREE.DirectionalLight(0xa0aec0, 0.6);
   moonLight.position.set(-10, 20, 5);
   if(!isLowEnd){
@@ -701,7 +877,6 @@ function setupLights(){
     moonLight.shadow.mapSize.height = 1024;
   }
   scene.add(moonLight);
-
   const blueLight = new THREE.PointLight(0x63b3ed, 0.5, 25);
   blueLight.position.set(-8, 5, -8);
   scene.add(blueLight);
@@ -716,7 +891,6 @@ function setupFloor(){
   floorPlane.position.y = CONFIG.GROUND_Y;
   if(!isLowEnd) floorPlane.receiveShadow = true;
   scene.add(floorPlane);
-
   gridHelper = new THREE.GridHelper(40, 40, 0x4a5568, 0x2d3748);
   gridHelper.position.y = CONFIG.GROUND_Y + 0.01;
   gridHelper.material.transparent = true;
@@ -728,8 +902,10 @@ function setupBuildings(){
   const buildingMat = new THREE.MeshStandardMaterial({
     color: 0x4a5568, roughness: 0.7, metalness: 0.3
   });
-  const windowMat = new THREE.MeshBasicMaterial({ color: 0x63b3ed, transparent: true, opacity: 0.6 });
-  
+  const windowMat = new THREE.MeshBasicMaterial({
+    color: 0x63b3ed, transparent: true, opacity: 0.6,
+    side: THREE.DoubleSide
+  });
   const buildingPositions = [
     { x: -8, z: -8, w: 3, h: 5, d: 3 },
     { x: 8, z: -6, w: 4, h: 7, d: 4 },
@@ -739,10 +915,8 @@ function setupBuildings(){
     { x: 0, z: -12, w: 6, h: 5, d: 4 },
     { x: 12, z: 0, w: 3, h: 6, d: 6 }
   ];
-  
   buildingPositions.forEach(pos => {
     const building = new THREE.Group();
-    
     const base = new THREE.Mesh(
       new THREE.BoxGeometry(pos.w, pos.h, pos.d),
       buildingMat
@@ -750,7 +924,6 @@ function setupBuildings(){
     base.position.y = pos.h / 2;
     if(!isLowEnd) base.castShadow = true;
     building.add(base);
-    
     for(let i = 0; i < 3; i++){
       for(let j = 0; j < 2; j++){
         const window = new THREE.Mesh(
@@ -765,7 +938,6 @@ function setupBuildings(){
         building.add(window);
       }
     }
-    
     building.position.set(pos.x, 0, pos.z);
     scene.add(building);
     buildings.push(building);
@@ -776,14 +948,11 @@ function setupDrone(){
   droneGroup = new THREE.Group();
   scene.add(droneGroup);
   droneGroup.position.set(0, state.altitude, 0);
-
   propellers = [];
-
   const bodyMat = new THREE.MeshStandardMaterial({ color: 0x2d3748, roughness: 0.4, metalness: 0.7 });
   const camoMat = new THREE.MeshStandardMaterial({ color: 0x4a5568, roughness: 0.5, metalness: 0.6 });
   const engineMat = new THREE.MeshStandardMaterial({ color: 0x1a202c, roughness: 0.3, metalness: 0.9 });
   const propMat = new THREE.MeshStandardMaterial({ color: 0xa0aec0, roughness: 0.2, metalness: 0.8 });
-
   const body = new THREE.Mesh(
     new THREE.BoxGeometry(1.2, 0.4, 1.2),
     bodyMat
@@ -791,19 +960,16 @@ function setupDrone(){
   body.position.y = 0;
   body.castShadow = true;
   droneGroup.add(body);
-
   const panel1 = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.05, 1.0), camoMat);
   panel1.position.set(-0.4, 0.22, 0);
   droneGroup.add(panel1);
   const panel2 = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.05, 1.0), camoMat);
   panel2.position.set(0.4, 0.22, 0);
   droneGroup.add(panel2);
-
   const motorPositions = [
     { x: 0.7, z: 0.7 }, { x: -0.7, z: 0.7 },
     { x: 0.7, z: -0.7 }, { x: -0.7, z: -0.7 }
   ];
-
   motorPositions.forEach((pos, index) => {
     const arm = new THREE.Mesh(
       new THREE.CylinderGeometry(0.05, 0.05, 1.0, 8),
@@ -813,17 +979,14 @@ function setupDrone(){
     arm.rotation.z = Math.PI / 2;
     arm.rotation.y = Math.atan2(pos.z, pos.x);
     droneGroup.add(arm);
-
     const motor = new THREE.Mesh(
       new THREE.CylinderGeometry(0.15, 0.15, 0.2, 12),
       engineMat
     );
     motor.position.set(pos.x, 0.05, pos.z);
     droneGroup.add(motor);
-
     const propGroup = new THREE.Group();
     propGroup.position.set(pos.x, 0.15, pos.z);
-    
     for(let i = 0; i < 3; i++){
       const blade = new THREE.Mesh(
         new THREE.BoxGeometry(0.4, 0.02, 0.08),
@@ -833,23 +996,18 @@ function setupDrone(){
       blade.rotation.y = (Math.PI * 2 / 3) * i;
       propGroup.add(blade);
     }
-    
     droneGroup.add(propGroup);
     propellers.push(propGroup);
   });
-
   const cam = new THREE.Mesh(
     new THREE.SphereGeometry(0.15, 12, 8),
     new THREE.MeshStandardMaterial({ color: 0x1a202c, roughness: 0.1, metalness: 0.9 })
   );
   cam.position.set(0, -0.1, 0.4);
   droneGroup.add(cam);
-
   const droneLight = new THREE.PointLight(0x63b3ed, 0.8, 6);
   droneLight.position.set(0, 0.2, 0);
   droneGroup.add(droneLight);
-
-  console.log("👻 Стелс-дрон ПРИЗРАК собран!");
 }
 
 function setupTrail(){
@@ -878,7 +1036,6 @@ function setupTargets(){
       this.startZ = z;
       this.active = false;
       this.collected = false;
-
       const baseMat = new THREE.MeshStandardMaterial({
         color: 0x718096, roughness: 0.6, metalness: 0.5
       });
@@ -889,14 +1046,12 @@ function setupTargets(){
       base.position.y = 0.75;
       if(!isLowEnd) base.castShadow = true;
       this.group.add(base);
-
       const antenna = new THREE.Mesh(
         new THREE.CylinderGeometry(0.05, 0.05, 2, 8),
         new THREE.MeshStandardMaterial({ color: 0xa0aec0, metalness: 0.9 })
       );
       antenna.position.y = 2;
       this.group.add(antenna);
-
       const dish = new THREE.Mesh(
         new THREE.ConeGeometry(0.6, 0.3, 16, 1, true),
         new THREE.MeshStandardMaterial({ color: 0x63b3ed, metalness: 0.8, side: THREE.DoubleSide })
@@ -904,33 +1059,27 @@ function setupTargets(){
       dish.position.y = 2.5;
       dish.rotation.x = Math.PI;
       this.group.add(dish);
-
       this.light = new THREE.PointLight(0x63b3ed, 1.5, 6);
       this.light.position.set(0, 2, 0);
       this.group.add(this.light);
-
       this.captureZone = new THREE.Mesh(
-        new THREE.CylinderGeometry(2, 2, 0.1, 16),
+        new THREE.CylinderGeometry(CONFIG.CAPTURE_RADIUS, CONFIG.CAPTURE_RADIUS, 0.1, 16),
         new THREE.MeshBasicMaterial({
           color: 0x63b3ed, transparent: true, opacity: 0.2
         })
       );
       this.captureZone.position.y = 0.1;
       this.group.add(this.captureZone);
-
       this.group.position.set(x, CONFIG.GROUND_Y, z);
       scene.add(this.group);
       this.reset();
     }
-
     update(){
       if(!this.active || this.collected) return;
-      
       const time = Date.now() * 0.001;
       this.light.intensity = 1 + Math.sin(time * 2) * 0.5;
       this.captureZone.material.opacity = 0.2 + Math.sin(time) * 0.1;
     }
-
     collect(){
       if(!this.active || this.collected) return false;
       this.collected = true;
@@ -938,30 +1087,26 @@ function setupTargets(){
       this.group.visible = false;
       return true;
     }
-
     reset(){
       this.active = true;
       this.collected = false;
       this.group.visible = true;
       this.group.position.set(this.startX, CONFIG.GROUND_Y, this.startZ);
     }
-
     isInCaptureZone(dronePos, droneAltitude){
       if(!this.active || this.collected) return false;
-      
       const dx = dronePos.x - this.group.position.x;
       const dz = dronePos.z - this.group.position.z;
       const horizontalDist = Math.sqrt(dx * dx + dz * dz);
-      
-      return horizontalDist < CONFIG.CAPTURE_RADIUS && droneAltitude < 10;
+      return horizontalDist < CONFIG.CAPTURE_RADIUS && droneAltitude < MAX_CAPTURE_ALTITUDE;
     }
   }
-
-  const startPos = [
-    [-10, -10], [10, -8], [-8, 10], [12, 12], [0, -14]
+  const allPositions = [
+    [-10, -10], [10, -8], [-8, 10], [12, 12], [0, -14],
+    [-14, 0], [14, -14]
   ];
   for(let i = 0; i < CONFIG.TARGET_COUNT; i++){
-    const pos = startPos[i];
+    const pos = allPositions[i];
     targets.push(new IntelObject(scene, pos[0], pos[1]));
   }
 }
@@ -976,7 +1121,6 @@ function setupEnemies(){
       this.pathIndex = 0;
       this.active = true;
       this.angle = 0;
-
       const bodyMat = new THREE.MeshStandardMaterial({
         color: 0xe53e3e, roughness: 0.5, metalness: 0.4
       });
@@ -987,9 +1131,12 @@ function setupEnemies(){
       body.position.y = 0.4;
       if(!isLowEnd) body.castShadow = true;
       this.group.add(body);
-
       this.viewCone = new THREE.Mesh(
-        new THREE.ConeGeometry(CONFIG.ENEMY_VIEW_DISTANCE * Math.tan(CONFIG.ENEMY_VIEW_ANGLE / 2), CONFIG.ENEMY_VIEW_DISTANCE, 16, 1, true),
+        new THREE.ConeGeometry(
+          CONFIG.ENEMY_VIEW_DISTANCE * Math.tan(CONFIG.ENEMY_VIEW_ANGLE / 2),
+          CONFIG.ENEMY_VIEW_DISTANCE,
+          16, 1, true
+        ),
         new THREE.MeshBasicMaterial({
           color: 0xe53e3e, transparent: true, opacity: 0.15, side: THREE.DoubleSide
         })
@@ -997,19 +1144,15 @@ function setupEnemies(){
       this.viewCone.rotation.x = Math.PI / 2;
       this.viewCone.position.set(0, 0.4, CONFIG.ENEMY_VIEW_DISTANCE / 2);
       this.group.add(this.viewCone);
-
       this.group.position.set(startX, CONFIG.GROUND_Y, startZ);
       scene.add(this.group);
     }
-
     update(){
       if(!this.active) return;
-      
       const target = this.path[this.pathIndex];
       const dx = target.x - this.group.position.x;
       const dz = target.z - this.group.position.z;
       const dist = Math.sqrt(dx * dx + dz * dz);
-      
       if(dist < 0.5){
         this.pathIndex = (this.pathIndex + 1) % this.path.length;
       } else {
@@ -1019,24 +1162,18 @@ function setupEnemies(){
         this.group.rotation.y = this.angle;
       }
     }
-
     canSeeDrone(dronePos){
       if(!this.active) return false;
-      
       const dx = dronePos.x - this.group.position.x;
       const dz = dronePos.z - this.group.position.z;
       const dist = Math.sqrt(dx * dx + dz * dz);
-      
       if(dist > CONFIG.ENEMY_VIEW_DISTANCE) return false;
-      
       const angleToDrone = Math.atan2(dx, dz);
       let angleDiff = angleToDrone - this.angle;
       while(angleDiff > Math.PI) angleDiff -= Math.PI * 2;
       while(angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-      
       return Math.abs(angleDiff) < CONFIG.ENEMY_VIEW_ANGLE / 2;
     }
-
     reset(){
       this.active = true;
       this.group.visible = true;
@@ -1044,23 +1181,20 @@ function setupEnemies(){
       this.pathIndex = 0;
     }
   }
-
-  const enemyPaths = [
+  const allEnemyPaths = [
     [{ x: -5, z: -5 }, { x: 5, z: -5 }, { x: 5, z: 5 }, { x: -5, z: 5 }],
     [{ x: 8, z: 0 }, { x: 8, z: 8 }, { x: 0, z: 8 }],
     [{ x: -8, z: 0 }, { x: -8, z: -8 }, { x: 0, z: -8 }],
-    [{ x: 0, z: 10 }, { x: 10, z: 10 }, { x: 10, z: 0 }]
+    [{ x: 0, z: 10 }, { x: 10, z: 10 }, { x: 10, z: 0 }],
+    [{ x: -12, z: 5 }, { x: -12, z: -5 }, { x: -6, z: -5 }, { x: -6, z: 5 }],
+    [{ x: 6, z: -12 }, { x: 14, z: -12 }, { x: 14, z: -6 }, { x: 6, z: -6 }]
   ];
-
-  const enemyStarts = [
-    { x: -5, z: -5 },
-    { x: 8, z: 0 },
-    { x: -8, z: 0 },
-    { x: 0, z: 10 }
+  const allEnemyStarts = [
+    { x: -5, z: -5 }, { x: 8, z: 0 }, { x: -8, z: 0 },
+    { x: 0, z: 10 }, { x: -12, z: 5 }, { x: 6, z: -12 }
   ];
-
   for(let i = 0; i < CONFIG.ENEMY_COUNT; i++){
-    enemies.push(new Patrol(scene, enemyStarts[i].x, enemyStarts[i].z, enemyPaths[i]));
+    enemies.push(new Patrol(scene, allEnemyStarts[i].x, allEnemyStarts[i].z, allEnemyPaths[i]));
   }
 }
 
@@ -1071,15 +1205,12 @@ function setupRadar(){
 
 function updateRadar(){
   if(!radarCtx) return;
-  
   const w = radarCanvas.width;
   const h = radarCanvas.height;
   const cx = w / 2;
   const cy = h / 2;
   const maxRange = 20;
-  
   radarCtx.clearRect(0, 0, w, h);
-  
   radarCtx.strokeStyle = '#4a5568';
   radarCtx.lineWidth = 1;
   for(let i = 1; i <= 3; i++){
@@ -1087,18 +1218,15 @@ function updateRadar(){
     radarCtx.arc(cx, cy, (w / 2) * (i / 3), 0, Math.PI * 2);
     radarCtx.stroke();
   }
-  
   radarCtx.fillStyle = '#48bb78';
   radarCtx.beginPath();
   radarCtx.arc(cx, cy, 3, 0, Math.PI * 2);
   radarCtx.fill();
-  
   enemies.forEach(enemy => {
     if(!enemy.active) return;
     const dx = enemy.group.position.x - droneGroup.position.x;
     const dz = enemy.group.position.z - droneGroup.position.z;
     const dist = Math.sqrt(dx * dx + dz * dz);
-    
     if(dist < maxRange){
       const rx = cx + (dx / maxRange) * (w / 2);
       const ry = cy + (dz / maxRange) * (h / 2);
@@ -1108,13 +1236,11 @@ function updateRadar(){
       radarCtx.fill();
     }
   });
-  
   targets.forEach(target => {
     if(!target.active || target.collected) return;
     const dx = target.group.position.x - droneGroup.position.x;
     const dz = target.group.position.z - droneGroup.position.z;
     const dist = Math.sqrt(dx * dx + dz * dz);
-    
     if(dist < maxRange){
       const rx = cx + (dx / maxRange) * (w / 2);
       const ry = cy + (dz / maxRange) * (h / 2);
@@ -1128,37 +1254,28 @@ function updateRadar(){
 
 function updateDetection(){
   let detected = false;
-  
   enemies.forEach(enemy => {
     if(enemy.canSeeDrone(droneGroup.position)){
       detected = true;
     }
   });
-  
   const altitudeFactor = state.altitude < CONFIG.STEALTH_ALTITUDE ? 1.5 : 0.5;
-  
   if(detected){
     state.detectionLevel += CONFIG.DETECTION_GROWTH * altitudeFactor;
   } else {
     state.detectionLevel -= CONFIG.DETECTION_DECAY;
   }
-  
   state.detectionLevel = Math.max(0, Math.min(100, state.detectionLevel));
-  
   if(state.detectionLevel > state.maxDetection){
     state.maxDetection = state.detectionLevel;
   }
-  
   document.getElementById('detection-fill').style.width = state.detectionLevel + '%';
-  
   if(state.detectionLevel >= 100 && !state.isCrashed){
     state.isCrashed = true;
-    showNotification("🚨 ВАС ОБНАРУЖИЛИ! Миссия провалена!", 'hit');
-    SFX.detected();
+    showVictoryModal();
   }
-  
   if(state.detectionLevel > 70 && state.detectionLevel < 75){
-    showNotification("⚠️ Высокая заметность!", 'hit');
+    showNotification("⚠️ Высокая заметность!", 'hit', true);
   }
   if(state.detectionLevel < 30 && state.detectionLevel > 25 && detected){
     SFX.stealth();
@@ -1169,7 +1286,6 @@ function applyCollision(){
   const pos = droneGroup.position;
   let collided = false;
   let impactForce = 0;
-
   if(pos.x > CONFIG.LIMIT_X){
     impactForce = Math.max(impactForce, Math.abs(state.velocity.x));
     pos.x = CONFIG.LIMIT_X;
@@ -1194,16 +1310,10 @@ function applyCollision(){
     state.velocity.z = Math.abs(state.velocity.z) * 0.5;
     collided = true;
   }
-
-  if(state.altitude <= 1){
-    state.altitude = 1;
-    if(state.velocity.y < -0.1){
-      impactForce = Math.abs(state.velocity.y) * 10;
-      state.velocity.y = 0;
-      collided = true;
-    }
+  if(state.altitude <= CONFIG.MIN_ALTITUDE){
+    state.altitude = CONFIG.MIN_ALTITUDE;
+    state.targetAltitude = Math.max(CONFIG.MIN_ALTITUDE, state.targetAltitude);
   }
-
   if(collided && impactForce > CONFIG.COLLISION_FORCE_THRESHOLD){
     triggerCollisionEffect(impactForce);
   }
@@ -1213,21 +1323,18 @@ function triggerCollisionEffect(force){
   const flash = document.getElementById('collision-flash');
   flash.classList.add('active');
   setTimeout(() => flash.classList.remove('active'), 150);
-  
   if(force >= CONFIG.CRASH_FORCE_THRESHOLD && !state.isCrashed){
     state.isCrashed = true;
-    showNotification("💥 КРУШЕНИЕ! Дрон разбился!", 'hit');
-    SFX.crash();
+    showVictoryModal();
   } else if(!state.isCrashed){
     SFX.collision();
-    showNotification("⚠️ СТОЛКНОВЕНИЕ!", 'hit');
+    showNotification("⚠️ СТОЛКНОВЕНИЕ!", 'hit', true);
   }
 }
 
 function handleKeyDown(e){
   state.keys[e.key] = true;
   if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)) e.preventDefault();
-  
   if((e.key === 't' || e.key === 'T' || e.key === 'е' || e.key === 'Е') && !state.isCrashed && !state.gameCompleted){
     toggleThermalMode();
   }
@@ -1248,23 +1355,21 @@ function toggleThermalMode(){
   state.thermalMode = !state.thermalMode;
   if(state.thermalMode){
     document.body.style.filter = 'hue-rotate(-30deg) saturate(1.5) contrast(1.2) brightness(0.9)';
-    scene.fog.color.setHex(0x1a0a00);
-    renderer.toneMappingExposure = 0.7;
+    if(scene && scene.fog) scene.fog.color.setHex(0x1a0a00);
+    if(renderer) renderer.toneMappingExposure = 0.7;
     enemies.forEach(e => {
-      e.group.children[0].material.emissive = new THREE.Color(0xff0000);
-      e.group.children[0].material.emissiveIntensity = 0.5;
+      if(!e || !e.group || !e.group.children || !e.group.children[0]) return;
+      const mesh = e.group.children[0];
+      if(mesh && mesh.material){
+        mesh.material.emissive = new THREE.Color(0xff0000);
+        mesh.material.emissiveIntensity = 0.5;
+      }
     });
   } else {
-    document.body.style.filter = '';
-    scene.fog.color.setHex(0x2d3748);
-    renderer.toneMappingExposure = 0.8;
-    enemies.forEach(e => {
-      e.group.children[0].material.emissive = new THREE.Color(0x000000);
-      e.group.children[0].material.emissiveIntensity = 0;
-    });
+    resetThermalMode();
   }
   SFX.thermal();
-  showNotification(state.thermalMode ? "🌡️ Тепловизор ВКЛ" : "👁️ Обычный режим", 'info');
+  showNotification(state.thermalMode ? "🌡️ Тепловизор ВКЛ" : "👁️ Обычный режим", 'info', true);
 }
 
 function handleMovement(){
@@ -1277,47 +1382,37 @@ function handleMovement(){
     droneGroup.position.y = state.altitude;
     return;
   }
-
   let forward = 0, right = 0;
   if(state.keys.ArrowUp || state.keys.w || state.keys.W || state.keys['ц'] || state.keys['Ц']) forward = -1;
   if(state.keys.ArrowDown || state.keys.s || state.keys.S || state.keys['ы'] || state.keys['Ы']) forward = 1;
   if(state.keys.ArrowLeft || state.keys.a || state.keys.A || state.keys['ф'] || state.keys['Ф']) right = -1;
   if(state.keys.ArrowRight || state.keys.d || state.keys.D || state.keys['в'] || state.keys['В']) right = 1;
-
   const targetPitch = forward * CONFIG.MAX_TILT;
   const targetRoll = right * CONFIG.MAX_TILT;
-
   state.pitch += (targetPitch - state.pitch) * 0.15;
   state.roll += (targetRoll - state.roll) * 0.15;
-
   droneGroup.rotation.x = state.pitch;
   droneGroup.rotation.z = state.roll;
-
   state.velocity.x += right * CONFIG.DRONE_SPEED * 0.08;
   state.velocity.z += forward * CONFIG.DRONE_SPEED * 0.08;
   state.velocity.x *= CONFIG.DRONE_DRAG;
   state.velocity.z *= CONFIG.DRONE_DRAG;
-
   droneGroup.position.x += state.velocity.x;
   droneGroup.position.z += state.velocity.z;
-
   if(state.keys.q || state.keys.Q || state.keys.Shift){
     state.targetAltitude = Math.min(CONFIG.MAX_ALTITUDE, state.altitude + CONFIG.CLIMB_SPEED);
   }
   if(state.keys.e || state.keys.E || state.keys.Control){
     state.targetAltitude = Math.max(CONFIG.MIN_ALTITUDE, state.altitude - CONFIG.DIVE_SPEED);
   }
-
   state.altitude += (state.targetAltitude - state.altitude) * 0.05;
   droneGroup.position.y = state.altitude;
-
   applyCollision();
   updateDetection();
 }
 
 function updateCapture(){
   if(state.isCrashed || state.gameCompleted) return;
-
   if(!state.mouseDown){
     if(state.currentTarget){
       state.currentTarget = null;
@@ -1327,7 +1422,6 @@ function updateCapture(){
     }
     return;
   }
-
   let targetInRange = null;
   for(let t of targets){
     if(t.isInCaptureZone(droneGroup.position, state.altitude)){
@@ -1335,7 +1429,6 @@ function updateCapture(){
       break;
     }
   }
-
   if(targetInRange){
     if(state.currentTarget !== targetInRange){
       state.currentTarget = targetInRange;
@@ -1350,22 +1443,18 @@ function updateCapture(){
           state.collectedCount++;
           document.getElementById('hits').innerText = state.collectedCount;
           document.getElementById('target-counter').innerText = state.collectedCount;
-          
           createCaptureEffect(
             targetInRange.group.position.x,
             targetInRange.group.position.y + 2,
             targetInRange.group.position.z
           );
-          
           SFX.lock();
           setTimeout(() => SFX.capture(), 100);
-          showNotification(`📡 ДАННЫЕ СОБРАНЫ! ${state.collectedCount}/${CONFIG.TARGET_COUNT}`, 'success');
-
+          showNotification(`📡 ДАННЫЕ СОБРАНЫ! ${state.collectedCount}/${CONFIG.TARGET_COUNT}`, 'success', true);
           state.currentTarget = null;
           state.captureStartTime = 0;
           document.getElementById('crosshair-progress').classList.remove('active');
           document.getElementById('crosshair').classList.remove('locked');
-
           if(state.collectedCount >= CONFIG.TARGET_COUNT){
             setTimeout(() => showVictoryModal(), 500);
           }
@@ -1391,7 +1480,6 @@ function createCaptureEffect(x, y, z){
   ring.position.set(x, y, z);
   ring.rotation.x = -Math.PI / 2;
   scene.add(ring);
-
   let frame = 0;
   let animationId;
   const animateRing = () => {
@@ -1409,7 +1497,6 @@ function createCaptureEffect(x, y, z){
     }
   };
   animateRing();
-
   activeAnimations.push({
     cancel: () => {
       if(animationId) cancelAnimationFrame(animationId);
@@ -1474,9 +1561,7 @@ function animate(time){
     state.animationId = null;
     return;
   }
-  
   state.animationId = requestAnimationFrame(animate);
-  
   if(!state.isCrashed && !state.gameCompleted){
     handleMovement();
     targets.forEach(t => t.update());
@@ -1485,14 +1570,11 @@ function animate(time){
     updateCapture();
     updateRadar();
   }
-  
   updatePropellers();
   updateCamera();
-
   if(gridHelper && gridHelper.material){
     gridHelper.material.opacity = 0.3 + Math.sin((time || 0) * 0.001) * 0.1;
   }
-
   renderer.render(scene, camera);
 }
 
@@ -1509,13 +1591,10 @@ function setupEventListeners(){
   window.addEventListener('mousedown', handleMouseDown);
   window.addEventListener('mouseup', handleMouseUp);
   window.addEventListener('resize', handleResize);
-  
-  // ✅ ИСПРАВЛЕНИЕ: Блокировка контекстного меню
   window.addEventListener('contextmenu', (e) => {
     e.preventDefault();
     return false;
   });
-  
   document.getElementById('resetDroneBtn').addEventListener('click', resetExercise);
   document.getElementById('fullRestartBtn').addEventListener('click', fullGameRestart);
   document.getElementById('exitMenuBtn').addEventListener('click', exitToMenu);
@@ -1545,6 +1624,8 @@ window.addEventListener('beforeunload', () => {
   }
   if(renderer) renderer.dispose();
 });
+
+initDifficultyUI();
 </script>
 </body>
 </html>
