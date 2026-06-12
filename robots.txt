@@ -1,0 +1,16 @@
+# robots.txt для Anti-AI Qwen UAV Simulator Lesson 6
+# Оператор ПРИЗРАК — Урок 6: Стелс-разведка
+
+User-agent: *
+Allow: /
+
+# Запрещаем индексацию служебных или неважных страниц (если они появятся)
+Disallow: /assets/private/
+Disallow: /temp/
+Disallow: /backup/
+
+# Указываем путь к карте сайта
+Sitemap: https://anti-ai-qwen-uav-simulator-lesson-6.vercel.app/sitemap.xml
+
+# Хостинг: Vercel
+# Последнее обновление: 2026-06-12
