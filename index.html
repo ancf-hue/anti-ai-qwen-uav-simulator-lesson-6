@@ -40,17 +40,14 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 .difficulty-card .desc{ font-size: 11px; color:#cbd5e0; line-height: 1.4; margin-bottom: 8px;}
 .difficulty-card .params{ font-size: 10px; color:#a0aec0; line-height: 1.5; font-family: monospace;}
 
-/* ✅ Цветовая схема: 🟢 ЛЁГКИЙ — зелёный #48bb78 */
 .difficulty-card.light{ border-color: #48bb78;}
 .difficulty-card.light.selected{ background: linear-gradient(145deg, rgba(72, 187, 120, 0.3), rgba(47, 133, 90, 0.5)); box-shadow: 0 0 30px rgba(72, 187, 120, 0.6), 0 10px 30px rgba(0,0,0,0.5);}
 .difficulty-card.light .name{ color: #68d391;}
 
-/* ✅ Цветовая схема: 🟡 СРЕДНИЙ — жёлтый #ecc94b */
 .difficulty-card.medium{ border-color: #ecc94b;}
 .difficulty-card.medium.selected{ background: linear-gradient(145deg, rgba(236, 201, 75, 0.3), rgba(221, 161, 32, 0.5)); box-shadow: 0 0 30px rgba(236, 201, 75, 0.6), 0 10px 30px rgba(0,0,0,0.5);}
 .difficulty-card.medium .name{ color: #f6e05e;}
 
-/* ✅ Цветовая схема: 🔴 СЛОЖНЫЙ — красный #e53e3e */
 .difficulty-card.hard{ border-color: #e53e3e;}
 .difficulty-card.hard.selected{ background: linear-gradient(145deg, rgba(229, 62, 62, 0.3), rgba(197, 48, 48, 0.5)); box-shadow: 0 0 30px rgba(229, 62, 62, 0.6), 0 10px 30px rgba(0,0,0,0.5);}
 .difficulty-card.hard .name{ color: #fc8181;}
@@ -323,10 +320,12 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+// ✅ ИСПРАВЛЕНИЕ: весь код обёрнут в DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+
 let audioCtx = null;
 let audioHintShown = false;
 
-// ✅ Три уровня сложности с правильной цветовой схемой
 const DIFFICULTY_PRESETS = {
   light: {
     name: 'ЛЁГКИЙ', icon: '🌱', className: 'light',
@@ -354,7 +353,6 @@ const DIFFICULTY_PRESETS = {
   }
 };
 
-// ✅ Совместимость со старым сохранением 'easy' → 'light'
 let currentDifficulty = localStorage.getItem('prizrak_difficulty') || 'medium';
 if(currentDifficulty === 'easy') currentDifficulty = 'light';
 if(!DIFFICULTY_PRESETS[currentDifficulty]) currentDifficulty = 'medium';
@@ -1626,6 +1624,8 @@ window.addEventListener('beforeunload', () => {
 });
 
 initDifficultyUI();
+
+}); // ✅ Закрытие DOMContentLoaded
 </script>
 </body>
 </html>
